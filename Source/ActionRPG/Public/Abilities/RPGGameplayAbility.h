@@ -24,6 +24,9 @@ public:
 	/** Map of gameplay tags to gameplay effect containers */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = GameplayEffects)
 	TMap<FGameplayTag, FRPGGameplayEffectContainer> EffectContainerMap;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	bool bEndWhenButtonReleased = false;
 
 	/** Make gameplay effect container spec to be applied later, using the passed in container */
 	UFUNCTION(BlueprintCallable, Category = Ability, meta=(AutoCreateRefTerm = "EventData"))
