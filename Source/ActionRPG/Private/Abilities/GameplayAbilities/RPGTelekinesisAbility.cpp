@@ -60,8 +60,8 @@ void URPGTelekinesisAbility::SelectObject()
 					SelectedObject->AttachToComponent(Socket, FAttachmentTransformRules(EAttachmentRule::KeepWorld, true));
 
 					FLatentActionInfo LatentActionInfo;
-					LatentActionInfo.CallbackTarget = this;
-					UKismetSystemLibrary::MoveComponentTo(SelectedObject->GetRootComponent(), FVector(0), SelectedObject->GetActorRotation(), false, false, 0.5f, false, EMoveComponentAction::Move, LatentActionInfo);
+					LatentActionInfo.CallbackTarget = OwningActor;
+					UKismetSystemLibrary::MoveComponentTo(SelectedObject->GetRootComponent(), FVector(0), SelectedObject->GetActorRotation(), true, false, 0.5f, false, EMoveComponentAction::Move, LatentActionInfo);
 				}
 			}
 		}
@@ -78,9 +78,9 @@ void URPGTelekinesisAbility::ThrowObject()
 			if(UStaticMeshComponent* Mesh = Cast<UStaticMeshComponent>(SelectedObject->FindComponentByClass<UStaticMeshComponent>()))
 			{
 				const ARPGCharacterBase* Character = Cast<ARPGCharacterBase>(OwningActor);
-				SelectedObject->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, false));
+				SelectedObject->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
 				Mesh->SetSimulatePhysics(true);
-				Mesh->AddImpulse(UKismetMathLibrary::GetForwardVector(Character->GetControlRotation()) * Power, NAME_None, false);
+				Mesh->AddImpulse(UKismetMathLibrary::GetForwardVector(Character->GetControlRotation()) * Power, NAME_None, true);
 				SelectedObject = nullptr;
 			}
 		}
