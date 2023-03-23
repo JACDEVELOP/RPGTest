@@ -52,6 +52,22 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual float GetMoveSpeed() const;
 
+	/** Returns if weapon if in the Hand */
+	UFUNCTION(BlueprintCallable)
+	virtual bool GetWeaponInHand() const{ return bWeaponInHand;};
+
+	/** set if the weapon is in hand */
+	UFUNCTION(BlueprintCallable)
+	virtual void SetWeaponInHand(const bool IsWeaponInHand){ bWeaponInHand = IsWeaponInHand;};
+
+	/** get weapon throwable */
+	UFUNCTION(BlueprintCallable)
+	virtual AActor* GetWeaponThrowable() const{ return WeaponThrowable;};
+
+	/** Set Weapon Throwable */
+	UFUNCTION(BlueprintCallable)
+	virtual void SetWeaponThrowable(AActor* NewWeaponThrowable){ WeaponThrowable = NewWeaponThrowable;};
+
 	/** Returns the character level that is passed to the ability system */
 	UFUNCTION(BlueprintCallable)
 	virtual int32 GetCharacterLevel() const;
@@ -92,6 +108,12 @@ protected:
 	/** The level of this character, should not be modified directly once it has already spawned */
 	UPROPERTY(EditAnywhere, Replicated, Category = Abilities)
 	int32 CharacterLevel;
+	
+	UPROPERTY(EditAnywhere)
+	bool bWeaponInHand = true;
+	
+	UPROPERTY(EditAnywhere)
+	AActor* WeaponThrowable;
 
 	/** Abilities to grant to this character on creation. These will be activated by tag or event and are not bound to specific inputs */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Abilities)
