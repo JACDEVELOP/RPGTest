@@ -6,6 +6,7 @@
 #include "Abilities/RPGGameplayAbility.h"
 #include "RPGRecoverWeapon.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponReturned);
 /**
  * 
  */
@@ -29,8 +30,10 @@ public:
 	
 	UFUNCTION()
 	void MoveCompleted() const;
-
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AActor* CurrentWeapon;
+	
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnWeaponReturned OnWeaponReturnedEvent;
 };

@@ -69,4 +69,5 @@ void URPGRecoverWeapon::MoveCompleted() const
 		WeaponMesh->SetVisibility(true);
 	}
 	CharacterBase->GetWeaponThrowable()->Destroy();
+	OnWeaponReturnedEvent.Broadcast();
 }
